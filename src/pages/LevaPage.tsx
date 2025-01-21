@@ -1,0 +1,62 @@
+import React from 'react'
+import { Canvas } from '@react-three/fiber'
+import Polyhedron from '../components/Polyhedron'
+import * as THREE from 'three'
+import { useMemo } from 'react'
+import { Stats, OrbitControls } from '@react-three/drei'
+import { Leva, useControls } from 'leva'
+
+
+export default function LevaPage() {
+  const polyhedron = useMemo(
+    () => [
+      new THREE.BoxGeometry(),
+      new THREE.SphereGeometry(0.785398),
+      new THREE.DodecahedronGeometry(0.785398),
+    ],
+    []
+  )
+
+  const options = useMemo(() => {
+    return {
+      x: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      y: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      z: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      visible: true,
+      color: { value: 'lime' },
+    }
+  }, [])
+
+  const pA = useControls('Polyhedron A', options)
+  const pB = useControls('Polyhedron B', options)
+
+  return (
+    <>
+    <div className='w-screen h-screen bg-black'>
+    <Canvas camera={{ position: [1, 2, 3] }}>
+      <Polyhedron
+        position={[-1, 1, 0]}
+        rotation={[pA.x, pA.y, pA.z]}
+        visible={pA.visible}
+        color={pA.color}
+        polyhedron={polyhedron}
+      />
+      <Polyhedron
+        position={[1, 1, 0]}
+        rotation={[pB.x, pB.y, pB.z]}
+        visible={pB.visible}
+        color={pB.color}
+        polyhedron={polyhedron}
+      />
+      <OrbitControls target-y={1} />
+      <axesHelper args={[5]} />
+      <gridHelper />
+      <Stats />
+    </Canvas>
+    </div>
+     
+   {/* <div className='leva-wrapper'><Leva /> </div>  */}
+    </>
+   
+  )
+}
