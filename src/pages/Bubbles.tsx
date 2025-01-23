@@ -1,6 +1,6 @@
 import React from "react";
 import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { Physics, RigidBody, BallCollider } from "@react-three/rapier";
 import { Environment } from "@react-three/drei";
 import { useRef } from "react";
@@ -27,11 +27,13 @@ function Bauble({ position, scale }) {
 }
 
 function Ground() {
+  const texture = useLoader(THREE.TextureLoader, "/image/lawn.jpg");
   return (
     <RigidBody type="fixed" restitution={0.8} friction={0.2}>
       <mesh receiveShadow position={[0, -1, 0]}>
         <boxGeometry args={[60, 1, 60]} />
-        <meshStandardMaterial color="lightgreen" />
+        {/* <meshStandardMaterial color="lightgreen" /> */}
+        <meshStandardMaterial map={texture} />
       </mesh>
     </RigidBody>
   );

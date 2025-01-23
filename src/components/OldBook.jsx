@@ -3,32 +3,46 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Sparkles } from "@react-three/drei";
 
 
-
 export const ThreeD = () => {
-    const [isRotating, setIsRotating] = useState(false);
+  const [isRotating, setIsRotating] = useState(false);
 
-    const book = useGLTF("/image/open_old_book_gltf/scene.gltf");
+  const book = useGLTF("/image/open_old_book_gltf/scene.gltf");
 
-    return (
-        <main className="flex min-h-screen item-center bg-black relative" >
-                <Canvas frameloop="demand" camera={{ position: [-2, 2, 4], fov: 25, near: 0.1, far: 1000 }}>
-            <OrbitControls autoRotate enableZoom={false} maxPolarAngle={Math.PI /2} enablePan={false}/>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <directionalLight position={[0, 0, 5]} />
-            <primitive object={book.scene} scale={10} />
-            <Sparkles count={100} scale={1} size={6} speed={0.002} noise={0.2} color="orange"/>
-            {/* <mesh position={[0, 0, -5]} scale={[10, 10, 1]}>
+  return (
+    <div className="w-screen h-screen">
+      <Canvas
+        frameloop="always"
+        camera={{ position: [-1, -20, 4], fov: 25 }}
+      >
+        <OrbitControls
+        //   autoRotate
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 3}
+          enablePan={false}
+        />
+        <ambientLight intensity={0.5}/>
+        <pointLight position={[10, 10, 10]} />
+        <directionalLight position={[0, 0, 5]} />
+        <primitive object={book.scene} scale={10} />
+        <Sparkles
+          count={900}
+          float={1}
+          scale={2}
+          size={6}
+          speed={0.5}
+          noise={0.2}
+          color={0xffffff}
+        />
+        {/* <mesh position={[0, 0, -5]} scale={[10, 10, 1]}>
                     <planeGeometry args={[10, 10]} />
                     <meshBasicMaterial color="lightgray" />
                 </mesh> */}
-        </Canvas>
-        </main>
-    
-    )
-}
-
-
+            <axesHelper args={[5]} />
+            <gridHelper/>
+      </Canvas>
+    </div>
+  );
+};
 
 // import { useGLTF, useAnimations } from "@react-three/drei";
 // import { Canvas } from "@react-three/fiber";
@@ -51,7 +65,7 @@ export const ThreeD = () => {
 //     return <primitive object={scene} scale={6} />;
 // };
 
-// export const ThreeD = () => { 
+// export const ThreeD = () => {
 //     return (
 //         <Canvas frameloop="demand" camera={{  position: [-4, 3, 6], fov: 45, near: 0.1, far: 1000 }}>
 //             <ambientLight intensity={0.1} />
@@ -62,8 +76,6 @@ export const ThreeD = () => {
 //         </Canvas>
 //     );
 // };
-
-
 
 // import { useGLTF } from "@react-three/drei";
 // import { Canvas } from "@react-three/fiber";
@@ -92,8 +104,7 @@ export const ThreeD = () => {
 
 // const book = useGLTF('/image/open_old_book_gltf/scene.gltf');
 
-
-// export const ThreeD = () => { 
+// export const ThreeD = () => {
 //     return (
 //         <Canvas frameloop="demand" camera={{ position: [-4, 3, 6], fov: 45, near: 0.1, far: 200 }}>
 //             <ambientLight intensity={0.1} />

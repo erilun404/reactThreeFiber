@@ -7,7 +7,7 @@ import { StartPage } from "./pages/startpage";
 import { TestPage } from "./pages/testPage";
 import LevaPage from "./pages/LevaPage";
 import { Bubbles } from "./pages/Bubbles";
-//import Bubbles from "./pages/Bubbles";
+import GamePage from "./pages/GamePage";
 import './index.css';
 
 
@@ -21,6 +21,7 @@ const App = () => {
         <Route path="/test" element={<TestPage />} />
         <Route path="/leva" element={<LevaPage />} />
         <Route path="/bubbles" element={<Bubbles />} />
+        <Route path="/game" element={<GamePage />} />
       </Routes>
     </Router>
   );
